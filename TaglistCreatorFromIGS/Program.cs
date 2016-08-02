@@ -26,7 +26,7 @@ namespace TaglistCreatorFromIGS
             //Dictionary<int, ParameterInfo> subControllerfile = new Dictionary<int, ParameterInfo>();
 
             CreateTagListFromIGS obj = new CreateTagListFromIGS(@"C:\Users\212478881\Desktop\TestCSV Folder\011110TestSiteFullIGSDriver.csv");
-
+            obj.generateTagList();
         }
     }
 }

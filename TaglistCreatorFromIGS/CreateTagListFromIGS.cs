@@ -25,7 +25,9 @@ namespace TaglistCreatorFromIGS
         Excel.Sheets worksheets = null;
         Excel.Worksheet xlSht = null;
 
-
+        /*
+         * this is the constructor
+         */
         public CreateTagListFromIGS(string FileFullPathName)
         {
             fullPathToCSVDocument = FileFullPathName;
@@ -36,7 +38,6 @@ namespace TaglistCreatorFromIGS
                 { 
                     throw new System.IO.FileNotFoundException();
                 }
-                createExcelFile();
 
             }
             catch (FileNotFoundException ex)
@@ -49,22 +50,10 @@ namespace TaglistCreatorFromIGS
             }
 
         }
-        private void startExcel()
-        {
-            xlApp = new Excel.Application();
 
-            if (xlApp == null)
-            {
-
-                MessageBox.Show("ERROR: EXCEL couldn't be started!","Error");
-                System.Windows.Forms.Application.Exit();
-
-            }
-
-        }
 
         /* Method: createExcelFile
-         * this method is used to create an excel file based on the name of the csv file. 
+         * this method is used to create an excel file based on the name of the csv file in the same folder as where the 
          * 
         */
         private void createExcelFile()
@@ -72,10 +61,44 @@ namespace TaglistCreatorFromIGS
             this.excelFileName = Path.GetFileNameWithoutExtension(this.fullPathToCSVDocument);
 
             string sourcePath = Path.GetDirectoryName(this.fullPathToCSVDocument); // this is directory of where the .csv file is located
-            string destFile = System.IO.Path.Combine(sourcePath, excelFileName + ".xlsx");
-            System.IO.File.WriteAllBytes(destFile, Properties.Resources.StandardTagList);  // this is used to copy the excel file in this projects resources and create a copy in the folder where the csv is located
+            excelFileFullPath = System.IO.Path.Combine(sourcePath, excelFileName + ".xlsx");
+            System.IO.File.WriteAllBytes(excelFileFullPath, Properties.Resources.StandardTagList);  // this is used to copy the excel file in this projects resources and create a copy in the folder where the csv is located
             
         }
+
+
+
+        // Method: initializeExcel
+        public void initializeExcel()
+        {
+            xlApp = new Excel.Application();
+
+            if (xlApp == null)
+            {
+
+                MessageBox.Show("ERROR: EXCEL couldn't be started!", "Error");
+                System.Windows.Forms.Application.Exit();
+
+            }
+
+            xlWorkBook = xlApp.Workbooks.Open(excelFileFullPath, 0, false, 5, "", "", false, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "", true, false, 0, true, false, false);
+            worksheets = xlWorkBook.Worksheets;
+            xlSht = xlWorkBook.Sheets[1];
+        }
+
+        // this method is used to create worksheets
+        public void createWorksheets(string xlSheetName)
+        {
+
+            xlApp.DisplayAlerts = false;
+            
+            xlSht.Copy(Type.Missing, xlWorkBook.Sheets[xlWorkBook.Sheets.Count]);
+            xlWorkBook.Sheets[xlWorkBook.Sheets.Count].name = xlSheetName;
+
+
+        }
+
+
         public void writeDataToExcelWorksheets(string worksheetName, List<string> stringList)
 
         {
@@ -84,39 +107,15 @@ namespace TaglistCreatorFromIGS
         }
 
 
-        // Method: initializeExcel
-        public void initializeExcel()
-        {
-            
-
-        }
-
-        // this method is used to create worksheets
-        public void createWorksheets(Excel.Application xlApp, string excelFilePath, string xlSheetName)
-        {
-
-            xlApp.DisplayAlerts = false;
-            string filePath = excelFilePath;
-            Excel.Workbook xlWorkBook = xlApp.Workbooks.Open(filePath, 0, false, 5, "", "", false, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "", true, false, 0, true, false, false);
-            Excel.Sheets worksheets = xlWorkBook.Worksheets;
-            Excel.Worksheet xlSht = xlWorkBook.Sheets[1];
-            xlSht.Copy(Type.Missing, xlWorkBook.Sheets[xlWorkBook.Sheets.Count]);
-            xlWorkBook.Sheets[xlWorkBook.Sheets.Count].name = xlSheetName;
-
-
-        }
-
-
         /*
- * Method: saveCloseExcelFile
- * this method serves 2 purpose: 
- * 1. used to Save, close the excel workbook,  
- * 2. Releases all the objects created to work with excel file such as worksheets, worksheet, workbook, excel application. 
- * This will free up any memory that is not needed by these objects. 
- * Parameters: Excel.Worksheet xlSht, Excel.Sheets worksheets, Excel.Workbook xlWorkBook, Excel.Application xlApp
- * These are all excel objects need to work with excel files. 
-
- */
+         * Method: saveCloseExcelFile
+         * this method serves 2 purpose: 
+         * 1. used to Save, close the excel workbook,  
+         * 2. Releases all the objects created to work with excel file such as worksheets, worksheet, workbook, excel application. 
+         * This will free up any memory that is not needed by these objects. 
+         * Parameters: Excel.Worksheet xlSht, Excel.Sheets worksheets, Excel.Workbook xlWorkBook, Excel.Application xlApp
+         * These are all excel objects need to work with excel files. 
+         */
         private void saveCloseExcelFile(Excel.Worksheet xlSht, Excel.Sheets worksheets, Excel.Workbook xlWorkBook, Excel.Application xlApp)
         {
             xlWorkBook.Save();
@@ -156,7 +155,7 @@ namespace TaglistCreatorFromIGS
         {
             //---------------------------------------------------------------------------
 
-            string csvFilePath = @"C:\Users\212478881\Documents\Visual Studio 2015\Projects\TestConsoleApplication\TestConsoleApplication\011110TestSiteFullIGSDriver.csv";
+            string csvFilePath = @"C:\Users\212478881\Desktop\TestCSV Folder\011110TestSiteFullIGSDriver.csv";
 
 
             //---------------------------------------------------------------------------
@@ -256,6 +255,14 @@ namespace TaglistCreatorFromIGS
                 //}
 
             }
+
+        }
+
+        public void generateTagList()
+        {
+            createExcelFile();
+            initializeExcel();
+
 
         }
 
