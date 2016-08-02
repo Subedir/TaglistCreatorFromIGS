@@ -69,5 +69,15 @@ namespace TaglistCreatorFromIGS.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] StandardTagList {
+            get {
+                object obj = ResourceManager.GetObject("StandardTagList", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

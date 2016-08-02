@@ -12,3 +12,4 @@ C:\Users\212478881\Documents\Visual Studio 2015\Projects\TaglistCreatorFromIGS\T
 C:\Users\212478881\Documents\Visual Studio 2015\Projects\TaglistCreatorFromIGS\TaglistCreatorFromIGS\obj\Debug\TaglistCreatorFromIGS.csproj.GenerateResource.Cache
 C:\Users\212478881\Documents\Visual Studio 2015\Projects\TaglistCreatorFromIGS\TaglistCreatorFromIGS\obj\Debug\TaglistCreatorFromIGS.exe
 C:\Users\212478881\Documents\Visual Studio 2015\Projects\TaglistCreatorFromIGS\TaglistCreatorFromIGS\obj\Debug\TaglistCreatorFromIGS.pdb
+C:\Users\212478881\Documents\Visual Studio 2015\Projects\TaglistCreatorFromIGS\TaglistCreatorFromIGS\bin\Debug\Resources\StandardTagList.xlsx

@@ -7,17 +7,152 @@ using System.Threading.Tasks;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Diagnostics;
 using Microsoft.VisualBasic.FileIO;
-
+using System.IO;
+using System.Windows.Forms;
+using System.Resources;
 
 namespace TaglistCreatorFromIGS
 {
     class CreateTagListFromIGS
     {
         //fields 
+        private Excel.Application xlApp = null;
+        Dictionary<string, List<ParameterInfo>> csvDataTable = null;
+        private string fullPathToCSVDocument = "";
+        private string excelFileName = ""; // this is used to name the excel file without the extension (.xlsx)
+        private string excelFileFullPath = ""; // this is the full path with the excel file name
+        Excel.Workbook xlWorkBook = null;
+        Excel.Sheets worksheets = null;
+        Excel.Worksheet xlSht = null;
 
-        // this ParameterInfo class is used to create a list which will store all the information for a parameter
 
-        public static void readCSVFile()
+        public CreateTagListFromIGS(string FileFullPathName)
+        {
+            fullPathToCSVDocument = FileFullPathName;
+
+            try
+            {
+                if (!System.IO.File.Exists(fullPathToCSVDocument))
+                { 
+                    throw new System.IO.FileNotFoundException();
+                }
+                createExcelFile();
+
+            }
+            catch (FileNotFoundException ex)
+            {
+                MessageBox.Show("File Not Found Error, Please check if the IGS File exist", "Error");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error");
+            }
+
+        }
+        private void startExcel()
+        {
+            xlApp = new Excel.Application();
+
+            if (xlApp == null)
+            {
+
+                MessageBox.Show("ERROR: EXCEL couldn't be started!","Error");
+                System.Windows.Forms.Application.Exit();
+
+            }
+
+        }
+
+        /* Method: createExcelFile
+         * this method is used to create an excel file based on the name of the csv file. 
+         * 
+        */
+        private void createExcelFile()
+        {
+            this.excelFileName = Path.GetFileNameWithoutExtension(this.fullPathToCSVDocument);
+
+            string sourcePath = Path.GetDirectoryName(this.fullPathToCSVDocument); // this is directory of where the .csv file is located
+            string destFile = System.IO.Path.Combine(sourcePath, excelFileName + ".xlsx");
+            System.IO.File.WriteAllBytes(destFile, Properties.Resources.StandardTagList);  // this is used to copy the excel file in this projects resources and create a copy in the folder where the csv is located
+            
+        }
+        public void writeDataToExcelWorksheets(string worksheetName, List<string> stringList)
+
+        {
+
+
+        }
+
+
+        // Method: initializeExcel
+        public void initializeExcel()
+        {
+            
+
+        }
+
+        // this method is used to create worksheets
+        public void createWorksheets(Excel.Application xlApp, string excelFilePath, string xlSheetName)
+        {
+
+            xlApp.DisplayAlerts = false;
+            string filePath = excelFilePath;
+            Excel.Workbook xlWorkBook = xlApp.Workbooks.Open(filePath, 0, false, 5, "", "", false, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "", true, false, 0, true, false, false);
+            Excel.Sheets worksheets = xlWorkBook.Worksheets;
+            Excel.Worksheet xlSht = xlWorkBook.Sheets[1];
+            xlSht.Copy(Type.Missing, xlWorkBook.Sheets[xlWorkBook.Sheets.Count]);
+            xlWorkBook.Sheets[xlWorkBook.Sheets.Count].name = xlSheetName;
+
+
+        }
+
+
+        /*
+ * Method: saveCloseExcelFile
+ * this method serves 2 purpose: 
+ * 1. used to Save, close the excel workbook,  
+ * 2. Releases all the objects created to work with excel file such as worksheets, worksheet, workbook, excel application. 
+ * This will free up any memory that is not needed by these objects. 
+ * Parameters: Excel.Worksheet xlSht, Excel.Sheets worksheets, Excel.Workbook xlWorkBook, Excel.Application xlApp
+ * These are all excel objects need to work with excel files. 
+
+ */
+        private void saveCloseExcelFile(Excel.Worksheet xlSht, Excel.Sheets worksheets, Excel.Workbook xlWorkBook, Excel.Application xlApp)
+        {
+            xlWorkBook.Save();
+            xlWorkBook.Close();
+
+            releaseObject(xlSht);
+            releaseObject(worksheets);
+            releaseObject(xlWorkBook);
+            releaseObject(xlApp);
+        }
+
+
+        // Method releaseObject
+        // This is used to clear up the object passed as parameter
+        private void releaseObject(object obj)
+        {
+            try
+            {
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
+                obj = null;
+            }
+            catch (Exception ex)
+            {
+                obj = null;
+                Debug.WriteLine("Exception Occured while releasing object " + ex.ToString());
+            }
+            finally
+            {
+                GC.Collect();
+            }
+        }
+
+
+
+
+        public void readCSVFile()
         {
             //---------------------------------------------------------------------------
 
@@ -93,6 +228,11 @@ namespace TaglistCreatorFromIGS
 
                 Debug.WriteLine("test");
 
+                foreach (KeyValuePair<string, List<ParameterInfo>> entry in csvDataTable)
+                {
+                    Debug.WriteLine(entry.Key);
+                }
+
                 //fields = parser.ReadFields();
                 //foreach (string field in fields)
                 //{
@@ -122,7 +262,7 @@ namespace TaglistCreatorFromIGS
 
 
     }
-
+    // this ParameterInfo class is used to create a list which will store all the information for a parameter
     class ParameterInfo
     {
         public ParameterInfo(string tagname, string address, string datatype)

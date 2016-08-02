@@ -1,0 +1,15 @@
+C:\Users\212478881\Documents\Visual Studio 2015\Projects\TaglistCreatorFromIGS\TaglistCreatorFromIGS\bin\Release\TaglistCreatorFromIGS.exe.config
+C:\Users\212478881\Documents\Visual Studio 2015\Projects\TaglistCreatorFromIGS\TaglistCreatorFromIGS\obj\Release\TaglistCreatorFromIGS.csproj.ResolveComReference.cache
+C:\Users\212478881\Documents\Visual Studio 2015\Projects\TaglistCreatorFromIGS\TaglistCreatorFromIGS\bin\Release\Resources\StandardTagList.xlsx
+C:\Users\212478881\Documents\Visual Studio 2015\Projects\TaglistCreatorFromIGS\TaglistCreatorFromIGS\bin\Release\TaglistCreatorFromIGS.exe
+C:\Users\212478881\Documents\Visual Studio 2015\Projects\TaglistCreatorFromIGS\TaglistCreatorFromIGS\bin\Release\TaglistCreatorFromIGS.pdb
+C:\Users\212478881\Documents\Visual Studio 2015\Projects\TaglistCreatorFromIGS\TaglistCreatorFromIGS\bin\Release\CsvHelper.dll
+C:\Users\212478881\Documents\Visual Studio 2015\Projects\TaglistCreatorFromIGS\TaglistCreatorFromIGS\bin\Release\CsvHelper.pdb
+C:\Users\212478881\Documents\Visual Studio 2015\Projects\TaglistCreatorFromIGS\TaglistCreatorFromIGS\bin\Release\CsvHelper.xml
+C:\Users\212478881\Documents\Visual Studio 2015\Projects\TaglistCreatorFromIGS\TaglistCreatorFromIGS\obj\Release\TaglistCreatorFromIGS.csprojResolveAssemblyReference.cache
+C:\Users\212478881\Documents\Visual Studio 2015\Projects\TaglistCreatorFromIGS\TaglistCreatorFromIGS\obj\Release\TaglistCreatorFromIGS.AboutBox.resources
+C:\Users\212478881\Documents\Visual Studio 2015\Projects\TaglistCreatorFromIGS\TaglistCreatorFromIGS\obj\Release\TaglistCreatorFromIGS.Form1.resources
+C:\Users\212478881\Documents\Visual Studio 2015\Projects\TaglistCreatorFromIGS\TaglistCreatorFromIGS\obj\Release\TaglistCreatorFromIGS.Properties.Resources.resources
+C:\Users\212478881\Documents\Visual Studio 2015\Projects\TaglistCreatorFromIGS\TaglistCreatorFromIGS\obj\Release\TaglistCreatorFromIGS.csproj.GenerateResource.Cache
+C:\Users\212478881\Documents\Visual Studio 2015\Projects\TaglistCreatorFromIGS\TaglistCreatorFromIGS\obj\Release\TaglistCreatorFromIGS.exe
+C:\Users\212478881\Documents\Visual Studio 2015\Projects\TaglistCreatorFromIGS\TaglistCreatorFromIGS\obj\Release\TaglistCreatorFromIGS.pdb
