@@ -32,12 +32,6 @@
             this.AboutStrip = new System.Windows.Forms.MenuStrip();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.IGSFileText = new System.Windows.Forms.Label();
-            this.UploadIGSFile = new System.Windows.Forms.Button();
-            this.openIGSFile = new System.Windows.Forms.OpenFileDialog();
-            this.openOPCFile = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.buttonIGS = new System.Windows.Forms.Button();
@@ -45,12 +39,17 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtAONumberBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.IGSFileText = new System.Windows.Forms.Label();
+            this.UploadIGSFile = new System.Windows.Forms.Button();
+            this.openIGSFile = new System.Windows.Forms.OpenFileDialog();
             this.AboutStrip.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // AboutStrip
@@ -84,57 +83,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(587, 236);
             this.tableLayoutPanel1.TabIndex = 1;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.groupBox5);
-            this.groupBox1.Controls.Add(this.UploadIGSFile);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(287, 230);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "IGS";
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.IGSFileText);
-            this.groupBox5.Location = new System.Drawing.Point(0, 116);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(286, 117);
-            this.groupBox5.TabIndex = 8;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Uploaded IGS file";
-            // 
-            // IGSFileText
-            // 
-            this.IGSFileText.AutoSize = true;
-            this.IGSFileText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IGSFileText.Location = new System.Drawing.Point(45, 25);
-            this.IGSFileText.Name = "IGSFileText";
-            this.IGSFileText.Size = new System.Drawing.Size(120, 20);
-            this.IGSFileText.TabIndex = 0;
-            this.IGSFileText.Text = "None Uploaded";
-            this.IGSFileText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // UploadIGSFile
-            // 
-            this.UploadIGSFile.Location = new System.Drawing.Point(38, 51);
-            this.UploadIGSFile.Name = "UploadIGSFile";
-            this.UploadIGSFile.Size = new System.Drawing.Size(171, 30);
-            this.UploadIGSFile.TabIndex = 5;
-            this.UploadIGSFile.Text = "Upload IGS File";
-            this.UploadIGSFile.UseVisualStyleBackColor = true;
-            this.UploadIGSFile.Click += new System.EventHandler(this.UploadIGSFile_Click);
-            // 
-            // openIGSFile
-            // 
-            this.openIGSFile.FileName = "IGS_File";
-            // 
-            // openOPCFile
-            // 
-            this.openOPCFile.FileName = "OPC_File";
             // 
             // tableLayoutPanel2
             // 
@@ -172,6 +120,7 @@
             this.buttonIGS.TabIndex = 5;
             this.buttonIGS.Text = "Generate TagList";
             this.buttonIGS.UseVisualStyleBackColor = true;
+            this.buttonIGS.Click += new System.EventHandler(this.buttonIGS_Click);
             // 
             // txtSiteBox
             // 
@@ -205,6 +154,53 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "AO Number (ie 500357)";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.groupBox5);
+            this.groupBox1.Controls.Add(this.UploadIGSFile);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(287, 230);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "IGS";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.IGSFileText);
+            this.groupBox5.Location = new System.Drawing.Point(0, 116);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(286, 117);
+            this.groupBox5.TabIndex = 8;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Uploaded IGS file";
+            // 
+            // IGSFileText
+            // 
+            this.IGSFileText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.IGSFileText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IGSFileText.Location = new System.Drawing.Point(3, 16);
+            this.IGSFileText.Name = "IGSFileText";
+            this.IGSFileText.Size = new System.Drawing.Size(280, 98);
+            this.IGSFileText.TabIndex = 0;
+            this.IGSFileText.Text = "None Uploaded";
+            this.IGSFileText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // UploadIGSFile
+            // 
+            this.UploadIGSFile.Location = new System.Drawing.Point(38, 51);
+            this.UploadIGSFile.Name = "UploadIGSFile";
+            this.UploadIGSFile.Size = new System.Drawing.Size(171, 30);
+            this.UploadIGSFile.TabIndex = 5;
+            this.UploadIGSFile.Text = "Upload IGS File";
+            this.UploadIGSFile.UseVisualStyleBackColor = true;
+            this.UploadIGSFile.Click += new System.EventHandler(this.UploadIGSFile_Click);
+            // 
+            // openIGSFile
+            // 
+            this.openIGSFile.FileName = "IGS_File";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -220,12 +216,11 @@
             this.AboutStrip.ResumeLayout(false);
             this.AboutStrip.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -241,7 +236,6 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label IGSFileText;
         private System.Windows.Forms.OpenFileDialog openIGSFile;
-        private System.Windows.Forms.OpenFileDialog openOPCFile;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button buttonIGS;

@@ -17,16 +17,10 @@ namespace TaglistCreatorFromIGS
         [STAThread]
         static void Main()
         {
-            //Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form1());
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Form1());
 
-
-
-            //Dictionary<int, ParameterInfo> subControllerfile = new Dictionary<int, ParameterInfo>();
-
-            CreateTagListFromIGS obj = new CreateTagListFromIGS(@"C:\Users\212478881\Desktop\TestCSV Folder\011110TestSiteFullIGSDriver.csv");
-            obj.generateTagList();
         }
     }
 }
