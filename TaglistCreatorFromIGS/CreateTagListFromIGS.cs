@@ -134,7 +134,7 @@ namespace TaglistCreatorFromIGS
 
             foreach (KeyValuePair<string, List<ParameterInfo>> entry in csvDataTable)
             {
-                Debug.WriteLine(entry.Key.ToString() +" " + xlWorkBook.Sheets.Count.ToString());
+                //Debug.WriteLine(entry.Key.ToString() +" " + xlWorkBook.Sheets.Count.ToString());
                 xlActiveSheet.Copy(Type.Missing, xlWorkBook.Sheets[xlWorkBook.Sheets.Count]);
                 xlWorkBook.Sheets[xlWorkBook.Sheets.Count].name = entry.Key;
             }
@@ -225,7 +225,8 @@ namespace TaglistCreatorFromIGS
             catch (Exception ex)
             {
                 obj = null;
-                Debug.WriteLine("Exception Occured while releasing object " + ex.ToString());
+                MessageBox.Show("Exception Occured while releasing object " + ex.ToString());
+                //Debug.WriteLine("Exception Occured while releasing object " + ex.ToString());
             }
             finally
             {
@@ -260,6 +261,37 @@ namespace TaglistCreatorFromIGS
             return false;
         }
 
+        /*
+         * Method: checkIGSFile
+         * Input: IGS .csv file
+         * Logic: this method is used to check if the IGS that has been uploaded is of the correct format.
+         */ 
+        public static Boolean checkIGSFile(string IGSCSVFile)
+        {
+            using (TextFieldParser parser = new TextFieldParser(IGSCSVFile))
+            {
+                parser.TextFieldType = FieldType.Delimited;
+                parser.SetDelimiters(",");
+
+                //this single readfields will read in the header column from the CSV
+                string[] fields = parser.ReadFields();
+                string Tag_Name_Header = fields[0];
+                string Address_Header = fields[1];
+                string Data_Type_Header = fields[2];
+                if (Tag_Name_Header == "Tag Name" && Address_Header == "Address" && Data_Type_Header == "Data Type")
+                {
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("Please Enter a Valid IGS File");
+                    return false;
+                }
+
+            }
+
+            }
+
         // method: readCSVFile
         // Input: CSV file
         // Output: Creates a data structure of type dictionary where the keys are the subcontroller names and the values are list of ParameterInfo objects
@@ -288,7 +320,7 @@ namespace TaglistCreatorFromIGS
 
                 //this single readfields will read in the header column from the CSV
                 string[] fields = parser.ReadFields();
-                Debug.WriteLine(fields.Length);
+                //Debug.WriteLine(fields.Length);
 
                 string Tag_Name_Header = fields[0];
                 string Address_Header = fields[1];
@@ -349,6 +381,9 @@ namespace TaglistCreatorFromIGS
 
 
             saveCloseExcelFile();
+
+
+                MessageBox.Show(string.Format("Excel File Created. File is located in: {0}", excelFileFullPath));
             }
 
             catch(Exception ex)

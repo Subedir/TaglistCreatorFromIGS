@@ -14,6 +14,7 @@ namespace TaglistCreatorFromIGS
     public partial class Form1 : Form
     {
         System.Windows.Forms.DialogResult result;
+        Boolean validIGSFile = false; // this is used to check if the IGS file uploaded is valid, default is false
         public Form1()
         {
             InitializeComponent();
@@ -53,7 +54,7 @@ namespace TaglistCreatorFromIGS
                 {
                     string CSVFileOnly = Path.GetFileName(openIGSFile.FileName);
                     IGSFileText.Text = CSVFileOnly;
-
+                    validIGSFile = CreateTagListFromIGS.checkIGSFile(openIGSFile.FileName);
 
                 }
                 catch (System.IO.FileNotFoundException fnfe)
@@ -85,12 +86,13 @@ namespace TaglistCreatorFromIGS
             }
 
 
-            if (result == System.Windows.Forms.DialogResult.OK)
+            if (result == System.Windows.Forms.DialogResult.OK && validIGSFile == true)
             {
 
             string excelFileName = txtAONumberBox.Text + txtSiteBox.Text + "TagList"; // this is the excel file name without the extensions
             CreateTagListFromIGS obj = new CreateTagListFromIGS(openIGSFile.FileName, excelFileName);
             obj.generateTagList(); // this generateTagList method is the only method that can be excuted from the createTagListFromIGS object
+                
                 return;
             }
             else
