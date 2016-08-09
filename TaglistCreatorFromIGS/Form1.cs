@@ -90,7 +90,7 @@ namespace TaglistCreatorFromIGS
 
             string excelFileName = txtAONumberBox.Text + txtSiteBox.Text + "TagList"; // this is the excel file name without the extensions
             CreateTagListFromIGS obj = new CreateTagListFromIGS(openIGSFile.FileName, excelFileName);
-            obj.generateTagList();
+            obj.generateTagList(); // this generateTagList method is the only method that can be excuted from the createTagListFromIGS object
                 return;
             }
             else

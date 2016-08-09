@@ -7,7 +7,7 @@ using System;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("IGS OPC to TagList")]
-[assembly: AssemblyDescription(("This Program creates a Taglist from IGS OPC .csv files that the AutoZT program generated\r\nRohit Subedi\r\nInSight Intern\r\nMcMaster University, 4th year Electrical and Management Engineering"))]
+[assembly: AssemblyDescription(("This Program creates a Taglist from IGS OPC .csv files that the AutoZT program generated \r\n \r\nRohit Subedi\r\nInSight Intern\r\nMcMaster University, 4th year Electrical and Management Engineering"))]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("General Electric")]
 [assembly: AssemblyProduct("IGS OPC to TagList")]
